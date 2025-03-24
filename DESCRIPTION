@@ -1,0 +1,19 @@
+Package: bibliodata
+Type: Package
+Title: Data structures to store several datasets and generate violinplots and heatmaps from these data with a shiny application 
+Version: 0.1.0
+Author: Elie Robert
+Maintainer: Elie Robert <elie.robert@gustaveroussy.fr>
+Description: Data structures to store several datasets and be able to quickly generate violinplots and heatmaps from these data through a shiny application.
+    Two S4 R class are defined in this package. The first one called Datasettorep allows to store a dataset as a matrix and a dataframe of metadata. The other one called
+    Bibliodata allows to store several object of the class Datasettorep and is associated to a function dedicated to launch a shiny app. This application can be used to do representations
+    (either violinplot or heatmaps representations) of one or several features from one of the dataset stored in the Bibliodata object. 
+License: Apache License (>= 2)
+Encoding: UTF-8
+LazyData: true
+Imports:
+    magrittr, rlang, ggplot2, ggsignif, stats, purrr, pheatmap, shiny, shinydashboard, rtracklayer, RColorBrewer, readr, R.utils 
+Depends:
+    methods
+RoxygenNote: 7.3.2
+
