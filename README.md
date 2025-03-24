@@ -10,7 +10,16 @@ This R package can be used to store one or several datasets corresponding to mat
 
 To install this package run :
 
-``` devtools::install_github("ERIGR/bibliodata") ```
+``` 
+if (!require("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+
+BiocManager::install("rtracklayer")
+
+
+devtools::install_github("ERIGR/bibliodata") 
+
+```
 
 in R. This should be enough to install the package. If you encounter some problems at this step, don't hesitate to open an issue. I will try to answer as soon as possible.
 
