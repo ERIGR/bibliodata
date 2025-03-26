@@ -8,7 +8,9 @@ This R package can be used to store one or several datasets corresponding to mat
 
 ## Installation of the package 
 
-To install this package run :
+### Installation in R
+
+This package can be installed more easily with an R version >= 4.4 however it should also work with R version < 4.4 if the package rtracklayer is already installed. To install this package run :
 
 ``` 
 if (!require("BiocManager", quietly = TRUE))
@@ -33,6 +35,80 @@ To load it :
 
 ``` require(readr) ```
 
+
+#### installation in a Singularity image
+
+Otherwise, it is also possible to install this package in a singularity image.
+
+A definition file such the following for instance should work to install the package : 
+
+```
+BootStrap: docker
+From: ubuntu:20.04
+
+#build image
+#sudo singularity build single_cell.simg single_cell.def
+#using image
+#sudo singularity shell -B local_folder:/WORKDIR/container_folder single_cell.simg
+
+%environment
+    export PATH=/opt/tools/bin:$PATH
+    export RETICULATE_MINICONDA_ENABLED=FALSE
+    LANG=en_US.UTF-8
+    LC_ALL=en_US.UTF-8
+    LC_TIME=en_US.UTF-8
+    LC_MONETARY=en_US.UTF-8
+    LC_PAPER=en_US.UTF-8
+    LC_MEASUREMENT=en_US.UTF-8
+
+%post
+    echo "Ubuntu version ######################"
+     cat /etc/lsb-release
+    apt-get -y update && apt-get -y upgrade
+    apt-get install -y libcurl4-openssl-dev libssl-dev libxml2-dev libgsl-dev libgit2-dev libpython3-dev libgmp3-dev 
+    apt-get install -y libfontconfig1-dev
+    apt-get install -y libharfbuzz-dev libfribidi-dev
+    apt-get install -y libfreetype6-dev libpng-dev libtiff5-dev libjpeg-dev
+    apt-get install -y dirmngr gnupg apt-transport-https ca-certificates software-properties-common
+    apt-get install -y libhdf5-dev
+    apt-get install -y libgeos-dev
+    apt-get install -y fftw3
+    apt-get install -y libfftw3-dev
+    apt-get install -y libgtk2.0-dev libcairo2-dev xvfb xauth xfonts-base
+    apt-get install -y libxt-dev
+    apt-get install -y libcurl4-openssl-dev libnlopt-dev
+    apt-get install -y libblas-dev liblapack-dev gfortran
+    apt-get install -y cmake
+    apt-get -y update && apt-get -y upgrade
+
+   
+    apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9
+    add-apt-repository 'deb http://cloud.r-project.org/bin/linux/ubuntu focal-cran40/'
+    apt-get -y update && apt-get -y upgrade
+    
+    
+
+    # Download R
+    apt-get install -y r-base-core=4.4.0-1.2004.0 r-base-dev=4.4.0-1.2004.0 #apt-cache policy r-base r-base-dev pour connaître les versions
+    apt-cache policy r-base r-base-dev
+
+
+    echo "R version ######################"
+    R --version
+
+    echo "Install R packages ######################"
+
+    # # Global packages
+    R -e 'install.packages("devtools")'
+    R -e 'install.packages("BiocManager")'
+    R -e 'BiocManager::install("rtracklayer")'
+    R -e 'install.packages("readr")'
+    R -e 'devtools::install_github("ERIGR/bibliodata")'
+
+%labels
+    Author Elie Robert
+
+```
 
 ## Use of the package
 
