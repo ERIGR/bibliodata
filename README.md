@@ -207,7 +207,8 @@ Then, we can launch the shiny application useful to generate easily violinplots 
 
 ```
 
-launchShiny_dashboard(example_bibliodata)
+ launchShiny_dashboard(example_bibliodata,colors = c("red","blue","green",
+"purple","orange","yellow","black","grey"))
 
 
 ```
