@@ -36,7 +36,7 @@ To load it :
 ``` require(readr) ```
 
 
-#### installation in a Singularity image
+#### Installation in a Singularity image
 
 Otherwise, it is also possible to install this package in a singularity image.
 
